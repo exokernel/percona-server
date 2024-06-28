@@ -257,15 +257,14 @@ endif()
 # getopt
 check_function_exists(getopt HAVE_GETOPT)
 if(HAVE_GETOPT)
-	add_definitions(-DHAVE_GETOPT)
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wcast-qual")
-else()
-	if(CMAKE_COMPILER_IS_GNUCC)
-		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-discarded-qualifiers")
-	endif()
-	if(CMAKE_C_COMPILER_ID STREQUAL "Clang")
-		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-incompatible-pointer-types-discards-qualifiers")
-	endif()
+    add_definitions(-DHAVE_GETOPT)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wcast-qual")
+endif()
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-discarded-qualifiers")
+
+if(CMAKE_C_COMPILER_ID STREQUAL "Clang")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-incompatible-pointer-types-discards-qualifiers")
 endif()
 
 # usable sigaction
